@@ -96,21 +96,20 @@ part2TibbleVersion <- function(input, myGameCards) {
         }
 
         if(doIHavematches) {
-            exTibble <<- exTibble |>
+            puzzleTibble <<- puzzleTibble |>
                 mutate(count = if_else(game == gameNumber, count + 1, count))
             for(j in 1:length(matches)) {
-                # can i just increase that game count and then run the algorthim again
+
                Recall(myGameCards[matches[j]], myGameCards)
             }
         } else {
-            exTibble <<- exTibble |>
+            puzzleTibble <<- puzzleTibble |>
                 mutate(count = if_else(game == gameNumber, count + 1, count))
 
-            exTibble <<- exTibble |>
-                mutate(howManyAmIWorth = is_else(howManyAmIWorth == 0, count, howManyAmIWorth))
+
         }
 
-
+        print(paste('current total: ', sum(puzzleTibble$count)))
 
     }
 
@@ -132,5 +131,4 @@ puzzleTibble <- tibble(game = c(1:length(puzzle)), count = 0, howManyCards = 0)
 part2TibbleVersion(puzzle, puzzle)
 sum(puzzleTibble$count)
 
-
-# 5747443
+# 6227972
